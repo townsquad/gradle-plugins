@@ -4,9 +4,14 @@ plugins {
     id 'com.gradle.plugin-publish' version '0.9.9'
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile gradleApi()
     compile localGroovy()
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.123'
 }
 
 project.with {
@@ -15,8 +20,8 @@ project.with {
 }
 
 pluginBundle {
-    website = 'http://www.townsq.com.br/'
-    vcsUrl = 'https://github.com/townsquad/s3-maven-gradle-plugin'
+    website = 'https://github.com/townsquad/gradle-plugins/blob/master/README.md'
+    vcsUrl = 'https://github.com/townsquad/gradle-plugins'
     description = 'Gradle plugin that resolves AWS credentials for private Maven repositories assembled on AWS S3'
     tags = ['s3', 'maven', 'repo', 'repositories']
 
