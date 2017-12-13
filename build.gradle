@@ -1,10 +1,29 @@
 plugins {
-  id 'groovy'
-  id 'idea'
+    id 'groovy'
+    id 'idea'
+    id 'com.gradle.plugin-publish' version '0.9.9'
 }
 
 dependencies {
-  compile gradleApi()
-  compile localGroovy()
+    compile gradleApi()
+    compile localGroovy()
 }
 
+project.with {
+    group = 'io.townsq'
+    version = '1.0.0-snapshot'
+}
+
+pluginBundle {
+    website = 'http://www.townsq.com.br/'
+    vcsUrl = 'https://github.com/townsquad/s3-maven-gradle-plugin'
+    description = 'Gradle plugin that resolves AWS credentials for private Maven repositories assembled on AWS S3'
+    tags = ['s3', 'maven', 'repo', 'repositories']
+
+    plugins {
+        s3MavenPlugin {
+            id = 'io.townsq.s3-maven'
+            displayName = 'S3 Maven Repositories Plugin'
+        }
+    }
+}
