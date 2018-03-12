@@ -16,7 +16,7 @@ dependencies {
 
 project.with {
     group = 'io.townsq'
-    version = '1.0.0-snapshot'
+    version = '1.0.0'
 }
 
 pluginBundle {
