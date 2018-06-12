@@ -45,3 +45,22 @@ This plugin is source-based on [hamstercommnity's plugin](
  https://github.com/hamstercommunity/awsm-credentials-gradle),
  and extends it to support AWS credential resolution
  from environment variables.
+ 
+ ### AWS Lambda Provisioning Plugin
+ 
+ Gradle plugin that provides tasks for AWS Lambda Functions provisioning.
+ 
+ ###### Usage
+ 
+ - Declare plugin on `build.gradle`
+ 
+  ```
+  plugins {
+     id 'io.townsq.aws-lambda-provisioning' version '1.0.0-snapshot' 
+  }
+  ```
+ 
+ - The AWS credentials are, by default, read from environment variables `AWS_ACCESS_KEY_ID` and `AWS_ACCESS_SECRET_KEY`
+    
+ - The AWS region is, by default, read from environment variable `AWS_REGION`
+ 
