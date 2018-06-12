@@ -18,7 +18,7 @@ dependencies {
 
 project.with {
     group = 'io.townsq'
-    version = '1.0.0'
+    version = '1.1.0'
 }
 
 pluginBundle {
@@ -32,7 +32,7 @@ pluginBundle {
             displayName = 'S3 Maven Repositories Plugin'
             description = 'Gradle plugin that resolves AWS credentials for private Maven repositories assembled on AWS S3'
             tags = ['s3', 'maven', 'repo', 'repositories']
-            version = '1.0.0'
+            version = '1.0.1'
         }
 
         awsLambdaProvisioning {
@@ -40,7 +40,7 @@ pluginBundle {
             displayName = 'AWS Lambda Function Provisioning Plugin'
             description = 'Gradle plugin that provides tasks for AWS Lambda Functions provisioning'
             tags = ['aws', 'lambda', 'provisioning', 'function']
-            version = '1.0.0'
+            version = '1.0.1'
         }
 
     }
