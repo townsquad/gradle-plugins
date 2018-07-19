@@ -43,8 +43,8 @@ pluginBundle {
             version = '1.0.1'
         }
 
-        awsEbDockerBundler {
-            id = 'io.townsq.aws-eb-docker-bundler'
+        awsEbDockerBundle {
+            id = 'io.townsq.aws-eb-docker-bundle'
             displayName = 'AWS EB Docker Bundle Plugin'
             description = 'Gradle plugin that provides tasks for bundling deployment descriptors for AWS EB update'
             tags = ['aws', 'eb', 'beanstalk', 'docker', 'dockerrun', 'ebextensions']
