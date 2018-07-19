@@ -6,6 +6,7 @@ import java.nio.file.Paths
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
+import org.gradle.api.tasks.bundling.Zip
 
 class AwsEbDockerBundlePlugin implements Plugin<Project> {
 
@@ -62,15 +63,15 @@ class AwsEbDockerBundlePlugin implements Plugin<Project> {
             group = 'AWS EB Docker Bundle'
             description = 'Copy .ebextensions from src/main/resources/.ebextensions'
 
-            from "$buildDir/resources/main/.ebextensions"
-            into "$buildDir/aws/eb/.ebextensions"
+            from "${project.buildDir}/resources/main/.ebextensions"
+            into "${project.buildDir}/aws/eb/.ebextensions"
         }
 
-        project.task('bundleAwsEbDockerDescriptors', type: Copy) {
+        project.task('bundleAwsEbDockerDescriptors', type: Zip) {
             group = 'AWS EB Docker Bundle'
             description = 'Bundle .ebextensions and Dockerrun.aws.json for upload into build/distributions/'
 
-            from "$buildDir/aws/eb"
+            from "${project.buildDir}/aws/eb"
         }
     }
 

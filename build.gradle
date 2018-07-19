@@ -18,7 +18,7 @@ dependencies {
 
 project.with {
     group = 'io.townsq'
-    version = '1.1.1'
+    version = '1.1.4'
 }
 
 pluginBundle {
@@ -48,7 +48,7 @@ pluginBundle {
             displayName = 'AWS EB Docker Bundle Plugin'
             description = 'Gradle plugin that provides tasks for bundling deployment descriptors for AWS EB update'
             tags = ['aws', 'eb', 'beanstalk', 'docker', 'dockerrun', 'ebextensions']
-            version = '1.0.0'
+            version = '1.0.2'
         }
 
     }
