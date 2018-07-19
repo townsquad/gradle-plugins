@@ -18,7 +18,7 @@ dependencies {
 
 project.with {
     group = 'io.townsq'
-    version = '1.1.0'
+    version = '1.1.1'
 }
 
 pluginBundle {
@@ -41,6 +41,14 @@ pluginBundle {
             description = 'Gradle plugin that provides tasks for AWS Lambda Functions provisioning'
             tags = ['aws', 'lambda', 'provisioning', 'function']
             version = '1.0.1'
+        }
+
+        awsEbDockerBundler {
+            id = 'io.townsq.aws-eb-docker-bundler'
+            displayName = 'AWS EB Docker Bundle Plugin'
+            description = 'Gradle plugin that provides tasks for bundling deployment descriptors for AWS EB update'
+            tags = ['aws', 'eb', 'beanstalk', 'docker', 'dockerrun', 'ebextensions']
+            version = '1.0.0'
         }
 
     }
