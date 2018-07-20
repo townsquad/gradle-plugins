@@ -11,14 +11,15 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.344'
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-lambda', version: '1.11.344'
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.344'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.370'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-elasticbeanstalk', version: '1.11.370'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-lambda', version: '1.11.370'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.370'
 }
 
 project.with {
     group = 'io.townsq'
-    version = '1.1.4'
+    version = '1.1.7'
 }
 
 pluginBundle {
@@ -48,7 +49,15 @@ pluginBundle {
             displayName = 'AWS EB Docker Bundle Plugin'
             description = 'Gradle plugin that provides tasks for bundling deployment descriptors for AWS EB update'
             tags = ['aws', 'eb', 'beanstalk', 'docker', 'dockerrun', 'ebextensions']
-            version = '1.0.2'
+            version = '1.0.3'
+        }
+
+        awsEbUpdate {
+            id = 'io.townsq.aws-eb-docker-update'
+            displayName = 'AWS Elastic Beanstalk Application Update'
+            description = 'Gradle plugin that provides tasks for updating an AWS Elastic Beanstalk application'
+            tags = ['aws', 'eb', 'beanstalk', 'docker', 'application', 'update']
+            version = '1.0.1'
         }
 
     }

@@ -24,29 +24,27 @@ class AwsEbDockerBundlePlugin implements Plugin<Project> {
                 ]
 
                 def image = [
-                        Name  : "${project.dockerImageName}:${project.applicationVersion}",
+                        Name  : "${project.dockerImageName}:${project.dockerImageTag}",
                         Update: 'true'
                 ]
 
-                def port = [
-                        ContainerPort: project.applicationPort
-                ]
+                def ports = project.containerPorts.toString().split(',').collect { [ContainerPort: it] }
 
                 def dockerrun = [
                         AWSEBDockerrunVersion: '1',
                         Authentication       : authentication,
                         Image                : image,
-                        Ports                : [port]
+                        Ports                : ports
                 ]
 
-                def distribution = "${project.buildDir}/aws/eb"
-                def folder = Paths.get distribution
+                def bundle = "${project.buildDir}/aws/eb/bundle"
+                def folder = Paths.get bundle
 
                 if (Files.notExists(folder)) {
                     Files.createDirectories folder
                 }
 
-                def path = "$distribution/Dockerrun.aws.json"
+                def path = "$bundle/Dockerrun.aws.json"
                 def file = Paths.get path
 
                 if (Files.notExists(file)) {
@@ -64,14 +62,16 @@ class AwsEbDockerBundlePlugin implements Plugin<Project> {
             description = 'Copy .ebextensions from src/main/resources/.ebextensions'
 
             from "${project.buildDir}/resources/main/.ebextensions"
-            into "${project.buildDir}/aws/eb/.ebextensions"
+            into "${project.buildDir}/aws/eb/bundle/.ebextensions"
         }
 
         project.task('bundleAwsEbDockerDescriptors', type: Zip) {
             group = 'AWS EB Docker Bundle'
             description = 'Bundle .ebextensions and Dockerrun.aws.json for upload into build/distributions/'
 
-            from "${project.buildDir}/aws/eb"
+            destinationDir = project.file "${project.buildDir}/aws/eb"
+
+            from "${project.buildDir}/aws/eb/bundle"
         }
     }
 
