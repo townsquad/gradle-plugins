@@ -36,6 +36,8 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
                 def describeVersionResult = beanstalk.describeApplicationVersions describeVersionRequest
 
                 if (describeVersionResult.applicationVersions.empty) {
+                    println "Creating new version: $key..."
+
                     def path = Paths.get "${project.buildDir}/aws/eb/${project.name}-${project.version}.zip"
                     def stream = Files.newInputStream path
 
@@ -60,6 +62,8 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
                         .withApplicationName(project.applicationName)
                         .withVersionLabel(project.applicationVersion)
                         .withEnvironmentName(project.applicationEnvironment)
+
+                println "Updating: $key..."
 
                 beanstalk.updateEnvironment updateEnvironmentRequest
             }
@@ -98,7 +102,6 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
                         health = result.environments.first().healthStatus
                     }
 
-                    println "Timeout: $timeout Time: $time Condition: ${time < timeout}"
                     println "Status: $status after ${time == 0 ? '' : "$minutes min "}${time % 60} sec..."
                 }
 
