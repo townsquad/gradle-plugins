@@ -116,7 +116,7 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
                     health = statusCheck.environments.first().health
                 }
 
-                if (health != 'Ok') {
+                if (health != 'Green') {
                     throw new IllegalStateException("Environment update failed: health status $health")
                 }
                 println "Environment successfully updated"
