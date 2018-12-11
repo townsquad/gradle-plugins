@@ -112,7 +112,7 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
                 def health = 'Unknown'
                 def statusCheck = beanstalk.describeEnvironments request
 
-                if (! result.environments.empty) {
+                if (! statusCheck.environments.empty) {
                     health = statusCheck.environments.first().healthStatus
                 }
 
