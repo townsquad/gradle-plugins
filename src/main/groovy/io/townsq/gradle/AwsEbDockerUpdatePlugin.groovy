@@ -81,7 +81,6 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
                         .withVersionLabel(project.applicationVersion)
 
                 def status = 'Updating'
-                def health = 'Unknown'
 
                 def timeout = (project.timeout as int) * 60
                 def start = LocalDateTime.now()
@@ -99,7 +98,6 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
 
                     if (! result.environments.empty) {
                         status = result.environments.first().status
-                        health = result.environments.first().healthStatus
                     }
 
                     println "Status: $status after ${time == 0 ? '' : "$minutes min "}${time % 60} sec..."
@@ -107,6 +105,15 @@ class AwsEbDockerUpdatePlugin implements Plugin<Project> {
 
                 if (time >= timeout) {
                     throw new IllegalStateException('Monitoring timed out')
+                }
+
+                sleep 15000
+
+                def health = 'Unknown'
+                def statusCheck = beanstalk.describeEnvironments request
+
+                if (! result.environments.empty) {
+                    health = statusCheck.environments.first().healthStatus
                 }
 
                 if (health != 'Ok') {
