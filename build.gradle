@@ -1,64 +1,39 @@
 plugins {
-    id 'groovy'
-    id 'idea'
-    id 'com.gradle.plugin-publish' version '0.9.9'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.19.0'
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.11.370'
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-elasticbeanstalk', version: '1.11.370'
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-lambda', version: '1.11.370'
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.370'
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.12.138'
 }
 
 project.with {
     group = 'io.townsq'
-    version = '1.1.12'
+    version = '2.0.0'
 }
 
 pluginBundle {
     website = 'https://github.com/townsquad/gradle-plugins/blob/master/README.md'
     vcsUrl = 'https://github.com/townsquad/gradle-plugins'
-
     plugins {
-
         s3MavenPlugin {
-            id = 'io.townsq.s3-maven'
             displayName = 'S3 Maven Repositories Plugin'
             description = 'Gradle plugin that resolves AWS credentials for private Maven repositories assembled on AWS S3'
+            version = '2.0.0'
             tags = ['s3', 'maven', 'repo', 'repositories']
-            version = '1.0.1'
         }
+    }
+}
 
-        awsLambdaProvisioning {
-            id = 'io.townsq.aws-lambda-provisioning'
-            displayName = 'AWS Lambda Function Provisioning Plugin'
-            description = 'Gradle plugin that provides tasks for AWS Lambda Functions provisioning'
-            tags = ['aws', 'lambda', 'provisioning', 'function']
-            version = '1.0.1'
+gradlePlugin {
+    plugins {
+        s3MavenPlugin {
+            id = 'io.townsq.s3-maven'
+            implementationClass = 'io.townsq.gradle.S3MavenPlugin'
         }
-
-        awsEbDockerBundle {
-            id = 'io.townsq.aws-eb-docker-bundle'
-            displayName = 'AWS EB Docker Bundle Plugin'
-            description = 'Gradle plugin that provides tasks for bundling deployment descriptors for AWS EB update'
-            tags = ['aws', 'eb', 'beanstalk', 'docker', 'dockerrun', 'ebextensions']
-            version = '1.0.3'
-        }
-
-        awsEbUpdate {
-            id = 'io.townsq.aws-eb-docker-update'
-            displayName = 'AWS Elastic Beanstalk Application Update'
-            description = 'Gradle plugin that provides tasks for updating an AWS Elastic Beanstalk application'
-            tags = ['aws', 'eb', 'beanstalk', 'docker', 'application', 'update']
-            version = '1.0.7'
-        }
-
     }
 }
